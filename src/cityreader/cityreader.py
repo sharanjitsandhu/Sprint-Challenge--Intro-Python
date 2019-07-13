@@ -7,8 +7,8 @@
 class City:
     def __init__(self, name, lat, lon):
         self.name = name
-        self.lat = lat
-        self.lon = lon
+        self.lat = float(lat)
+        self.lon = float(lon)
 
     def __repr__(self):
         return f"{self.name}, {self.lat}, {self.lon}"
@@ -33,8 +33,12 @@ def cityreader(cities=[]):
     # TODO Implement the functionality to read from the 'cities.csv' file
     # For each city record, create a new City instance and add it to the
     # `cities` list
-
-    return cities
+    with open('cities.csv') as c:
+        next(c)
+        for line in c:
+            split = line.split(',')
+            cities.append(City(split[0], split[3], split[4]))
+        return cities
 
 
 cityreader(cities)
